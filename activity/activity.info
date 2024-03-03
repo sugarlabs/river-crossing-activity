@@ -1,0 +1,9 @@
+[Activity]
+name = Goat Cabbage Wolf
+activity_version = 1
+bundle_id = org.sugarlabs.goatcabbagewolf
+icon = gcw
+exec = sugar-activity3 activity.GoatCabbageWolfActivity
+license = GPLv3+
+summary = A Puzzle and Strategy game
+repository = https://github.com/marsian83/GoatCabbageWolfActivity.git
