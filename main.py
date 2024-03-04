@@ -3,7 +3,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-class GoatCabbageWolf:
+class RiverCrossing:
     def __init__(self):
         self.running = True
         self.clock = pygame.time.Clock()
@@ -34,7 +34,7 @@ class GoatCabbageWolf:
         if not (self.gameDisplay):
             self.gameDisplay = pygame.display.set_mode(
                 (self.info.current_w, self.info.current_h))
-            pygame.display.set_caption("Goat, Cabbage and Wolf")
+            pygame.display.set_caption("River Crossing Puzzle")
 
         while self.running:
             self.gameDisplay.fill((2, 20, 20))
@@ -58,5 +58,5 @@ class GoatCabbageWolf:
 if __name__ == "__main__":
     pygame.init()
     pygame.display.set_mode((0, 0), pygame.RESIZABLE)
-    game = GoatCabbageWolf()
+    game = RiverCrossing()
     game.run()

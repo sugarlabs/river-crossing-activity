@@ -12,16 +12,16 @@ from sugar3.activity.widgets import StopButton
 import sugargame.canvas
 
 from gettext import gettext as _
-from main import GoatCabbageWolf
+from main import RiverCrossing
 
 
-class GoatCabbageWolfActivity(Activity):
+class RiverCrossingActivity(Activity):
 
     def __init__(self, handle):
         Activity.__init__(self, handle)
         self.max_participants = 1
         self.sound = True
-        self.game = GoatCabbageWolf()
+        self.game = RiverCrossing()
         self.build_toolbar()
         self.game.canvas = sugargame.canvas.PygameCanvas(
                 self,
