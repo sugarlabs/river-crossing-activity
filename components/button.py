@@ -5,10 +5,10 @@ class Button:
     def __init__(self, x, y, label, action, w = None, h = None, scale_factor = 0.05):
         image = config.images.get("button")
 
-        if w is not None:
+        if h is not None:
             m_w = int(image.get_width() * (h / image.get_height()))
             image = pygame.transform.scale(image, (m_w, image.get_height()))
-        if h is not None:
+        if w is not None:
             m_h = int(image.get_height() * (w / image.get_width()))
             image = pygame.transform.scale(image, (image.get_width(), m_h))
 
