@@ -3,6 +3,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 import config
+from views import menu
 
 class RiverCrossing:
     def __init__(self):
@@ -33,7 +34,8 @@ class RiverCrossing:
         self.display_rect = self.gameDisplay.get_rect()
 
         config.set_theme("default")
-        
+        menu.view(self)
+
         if not (self.gameDisplay):
             self.gameDisplay = pygame.display.set_mode(
                 (self.info.current_w, self.info.current_h))

@@ -1,17 +1,30 @@
 import os
 import pygame
+from font import Font
 
-themes = ["default"]
-theme = themes[0] # Set initial theme
+themes = {}
 
+def define_theme(name, text_color, bg_color, font_name):
+    themes[name] = ({
+                   "colors" : {"text" : text_color, "bg" : bg_color},
+                   "font" : font_name
+                   })
+
+define_theme("default", (0, 0, 0), (0, 100, 50), "Geist.ttf")
+
+theme = "default" # Set initial theme
+font = Font()
+colors = {}
 images = {}
 
-def set_theme(theme):
-    if theme in themes:
-        theme = theme
+def set_theme(theme_name):
+    global theme
+    if theme_name in themes.keys():
+        theme = theme_name
         load_assets()
 
 def load_images():
+    images = {}
     directory = f"assets/images/themes/{theme}"
     for filename in os.listdir(directory):
         if filename.endswith(".png") or filename.endswith(".jpg") or filename.endswith(".jpeg"):
@@ -25,4 +38,11 @@ def load_images():
     return images 
 
 def load_assets():
-    load_images()
+    global colors, images
+
+    images = load_images()
+
+    font_name = themes[theme]["font"]
+    font.intialize(f"assets/fonts/{font_name}")
+
+    colors = themes[theme]["colors"]
