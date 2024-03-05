@@ -13,6 +13,7 @@ class RiverCrossing:
         self.gameDisplay = None
         self.info = None
         self.update_function = None
+        self.bg = None
 
     def vw(self, x):
         return (x / 100) * self.display_rect.width
@@ -28,13 +29,37 @@ class RiverCrossing:
     def stop(self):
         self.running = False
 
+    def set_screen(self, view):
+        view(self)
+
+    def set_background(self, bg):
+        w, h = bg.get_size()
+        screen_w, screen_h = self.gameDisplay.get_size()
+        m_w, m_h = w, h
+
+        m_bg = bg
+
+        if screen_w < w or screen_w > w:
+            m_h = (h // w) * screen_w
+            m_bg = pygame.transform.scale(
+            bg, (screen_w, m_h))
+            w, h = m_bg.get_size()
+            m_w, m_h = w, h
+
+        if screen_h > h:
+            m_w = (w // h) * screen_h
+            m_bg = pygame.transform.scale(m_w, screen_h)
+
+        self.bg = m_bg
+
+
     def run(self):
         self.gameDisplay = pygame.display.get_surface()
         self.info = pygame.display.Info()
         self.display_rect = self.gameDisplay.get_rect()
 
         config.set_theme("default")
-        menu.view(self)
+        self.set_screen(menu.view)
 
         if not (self.gameDisplay):
             self.gameDisplay = pygame.display.set_mode(
@@ -43,6 +68,9 @@ class RiverCrossing:
 
         while self.running:
             self.gameDisplay.fill((2, 20, 20))
+            
+            if self.bg is not None:
+                self.gameDisplay.blit(self.bg, (0, 0))
 
             while Gtk.events_pending():
                 Gtk.main_iteration()

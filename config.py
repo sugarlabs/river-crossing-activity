@@ -4,16 +4,18 @@ from font import Font
 
 themes = {}
 
-def define_theme(name, text_color, bg_color, font_name):
+def define_theme(name, text_color, bg_color, primary_font_name, scondary_font_name):
     themes[name] = ({
                    "colors" : {"text" : text_color, "bg" : bg_color},
-                   "font" : font_name
+                   "primary_font" : primary_font_name,
+                   "secondary_font" : scondary_font_name
                    })
 
-define_theme("default", (0, 0, 0), (0, 100, 50), "Geist.ttf")
+define_theme("default", (0, 0, 0), (0, 100, 50), "Wood.ttf", "Geist.ttf")
 
 theme = "default" # Set initial theme
-font = Font()
+font_primary = Font()
+font_secondary = Font()
 colors = {}
 images = {}
 
@@ -42,7 +44,10 @@ def load_assets():
 
     images = load_images()
 
-    font_name = themes[theme]["font"]
-    font.intialize(f"assets/fonts/{font_name}")
+    primary_font_name = themes[theme]["primary_font"]
+    font_primary.intialize(f"assets/fonts/{primary_font_name}")
+
+    secondary_font_name = themes[theme]["secondary_font"]
+    font_secondary.intialize(f"assets/fonts/{secondary_font_name}")
 
     colors = themes[theme]["colors"]
