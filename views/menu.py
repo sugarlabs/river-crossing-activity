@@ -1,11 +1,13 @@
 from components.button import Button
+from views import game as gamescreen
+import config
 
 def view(game):
     buttons = []
     vw = game.vw
     vh = game.vh
 
-    buttons.append(Button(vw(50), vh(20), "Play", lambda x=32 : print(f"ok {x}"), h = vh(10)))
+    buttons.append(Button(vw(50), vh(50), "Play", lambda : game.set_screen(gamescreen.view), h = vh(20), font = config.font_primary.xl))
 
     def update():
         for btn in buttons:

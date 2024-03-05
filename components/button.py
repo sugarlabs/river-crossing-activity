@@ -2,15 +2,15 @@ import pygame
 import config
 
 class Button:
-    def __init__(self, x, y, label, action, w = None, h = None, scale_factor = 0.05):
+    def __init__(self, x, y, label, action, w = None, h = None, scale_factor = 0.05, font = None):
         image = config.images.get("button")
 
         if h is not None:
             m_w = int(image.get_width() * (h / image.get_height()))
-            image = pygame.transform.scale(image, (m_w, image.get_height()))
+            image = pygame.transform.scale(image, (m_w, int(h)))
         if w is not None:
             m_h = int(image.get_height() * (w / image.get_width()))
-            image = pygame.transform.scale(image, (image.get_width(), m_h))
+            image = pygame.transform.scale(image, (int(w), m_h))
 
         self.rect = image.get_rect()
 
@@ -23,8 +23,11 @@ class Button:
         self.rect.x = self.x
         self.rect.y = self.y
 
+        if font is None:
+            font = config.font_primary.md
+
         text_color = config.colors["text"]
-        self.label = config.font.md.render(label, True, text_color)
+        self.label = font.render(label, True, text_color)
         self.gameDisplay = pygame.display.get_surface()
 
         self.action = action
@@ -43,7 +46,7 @@ class Button:
 
         label_rect = self.label.get_rect()
         m_x = self.x + self.rect.width // 2 - label_rect.width // 2
-        m_y = self.y + self.rect.height // 2 - label_rect.height // 2
+        m_y = self.y + self.rect.height // 2 - int(label_rect.height * 0.7)
         self.gameDisplay.blit(self.label, (m_x, m_y))
 
     def hovered(self):
