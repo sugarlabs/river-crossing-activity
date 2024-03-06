@@ -7,7 +7,7 @@ def view(game):
     vw = game.vw
     vh = game.vh
 
-    buttons.append(Button(vw(50), vh(50), "Play", lambda : game.set_screen(gamescreen.view), h = vh(20), font = config.font_primary.xl))
+    buttons.append(Button(vw(50), vh(50), "Play", h = vh(20), font = config.font_primary.xl))
 
     def update():
         for btn in buttons:

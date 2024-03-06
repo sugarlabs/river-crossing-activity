@@ -1,18 +1,17 @@
 import config, utils, pygame
+from components.common import Clickable, Drawable
 
-class Cabbage:
+class Cabbage(Clickable, Drawable):
     def __init__(self, x, bottom, w = None, h = None):
+        super().__init__()
+
         self.gameDisplay = pygame.display.get_surface()
 
-        self.image = utils.scale_image_maintain_ratio(config.images.get("cabbage"), w = w, h = h)
+        image = utils.scale_image_maintain_ratio(config.images.get("cabbage"), w = w, h = h)
+        self.set_image_rect(image, x, bottom - image.get_height())
 
-        self.x = x
-        self.y = bottom - self.image.get_height()
-
-        self.on_click = None
-
-    def draw(self):
-        self.gameDisplay.blit(self.image, (self.x, self.y))
+        self.on_click = lambda : print("Cabbbage ko chua")
 
     def update(self):
-        self.draw()
+        Clickable.update(self)
+        Drawable.update(self)
