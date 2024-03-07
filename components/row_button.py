@@ -15,7 +15,7 @@ class RowButton(Clickable, Drawable):
         self.scale_factor = 0.1
 
     def flip(self):
-        self.img = pygame.transform.flip(self.image, True, False)
+        self.img = pygame.transform.flip(self.img, True, False)
 
     def update(self):
         Drawable.update(self)
