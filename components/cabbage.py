@@ -10,8 +10,6 @@ class Cabbage(Clickable, Drawable):
         image = utils.scale_image_maintain_ratio(config.images.get("cabbage"), w = w, h = h)
         self.set_image_rect(image, x, bottom - image.get_height())
 
-        self.on_click = lambda : print("Cabbbage ko chua")
-
     def update(self):
         Clickable.update(self)
         Drawable.update(self)

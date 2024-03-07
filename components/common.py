@@ -8,7 +8,9 @@ class Clickable:
         self.rect = None
 
     def hovered(self):
-        return self.rect.collidepoint(pygame.mouse.get_pos())
+        if self.rect is not None:
+            return self.rect.collidepoint(pygame.mouse.get_pos())
+        return False
 
     def update(self):
         pressed_btn = pygame.mouse.get_pressed()[0]

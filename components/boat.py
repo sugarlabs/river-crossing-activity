@@ -1,33 +1,37 @@
 import pygame
 import config
 import utils
+from components.common import Clickable
 
-class Boat:
+class Boat(Clickable):
     def __init__(self, left_x, right_x, bottom, w):
-       self.gameDisplay = pygame.display.get_surface()
+        super().__init__()
 
-       boat = config.images.get("boat")
-       farmer = config.images.get("farmer")
+        self.gameDisplay = pygame.display.get_surface()
 
-       self.boat = utils.scale_image_maintain_ratio(boat, w = w)
-       self.farmer = utils.scale_image_maintain_ratio(farmer, w = w // 3)
+        boat = config.images.get("boat")
+        farmer = config.images.get("farmer")
 
-       self.boat_w = self.boat.get_width()
-       self.boat_h = self.boat.get_height()
+        self.boat = utils.scale_image_maintain_ratio(boat, w = w)
+        self.farmer = utils.scale_image_maintain_ratio(farmer, w = w // 3)
 
-       self.farmer_h = self.farmer.get_height()
-       
-       self.left_x = left_x
-       self.right_x = right_x
-       self.x = self.left_x
-       self.y = bottom - self.boat_h // 2
+        self.boat_w = self.boat.get_width()
+        self.boat_h = self.boat.get_height()
 
-       self.holding = None
-       self.holding_w = None
-       self.holding_h = None
+        self.farmer_h = self.farmer.get_height()
+        
+        self.left_x = left_x
+        self.right_x = right_x
+        self.x = self.left_x
+        self.y = bottom - self.boat_h // 2
 
-       self.on_click = None
+        self.holding = None
+        self.holding_w = None
+        self.holding_h = None
 
+        self.position = "left"
+        self.moving = False
+        self.row_callback = None
 
     def hold(self, image):
         if image is None:
@@ -46,15 +50,34 @@ class Boat:
             holding_x = self.x + self.boat_w * 0.9 - self.holding_w
             holding_y = self.y - self.holding_h * 0.5
             self.gameDisplay.blit(self.holding, (int(holding_x), int(holding_y)))
-        
+
         self.gameDisplay.blit(self.boat, (self.x, self.y))
 
-    def hovered(self):
-        return self.rect.collidepoint(pygame.mouse.get_pos())
+    def row(self, callback = None):
+        if self.moving:
+            return
+
+        if self.position == "left":
+            self.position = "right"
+        elif self.position == "right":
+            self.position = "left"
+
+        self.row_callback = callback
 
     def update(self):
+        Clickable.update(self)
+        self.rect = self.boat.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
         self.draw()
-        if self.on_click is not None:
-            pressed_btn = pygame.mouse.get_pressed()[0]
-            if self.hovered() and pressed_btn != 1:
-                self.on_click()
+
+        if self.position == "right" and self.x <= self.right_x:
+            self.moving = True
+            self.x += 3
+        elif self.position == "left" and self.x >= self.left_x:
+            self.moving = True
+            self.x -= 3
+        else:
+            if self.moving and self.row_callback is not None:
+                self.row_callback()
+            self.moving = False
