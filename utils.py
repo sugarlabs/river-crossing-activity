@@ -18,3 +18,6 @@ def scale_image_maintain_ratio(img, w = None, h = None):
 def array_has_no_none(arr):
     return all(element is not None for element in arr)
 
+def compare_arrays_unordered(*arrays):
+    sets = [set(arr) for arr in arrays]
+    return all(s == sets[0] for s in sets)

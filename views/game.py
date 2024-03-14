@@ -1,5 +1,5 @@
 import pygame
-import config
+import config, utils
 from components.boat import Boat
 from components.goat import Goat
 from components.wolf import Wolf
@@ -11,6 +11,8 @@ def view(game):
     vh = game.vh
 
     game.set_background(config.images.get("background"))
+
+    lose_conditions = [[Goat, Cabbage], [Wolf, Goat]]
 
     land_width = vw(30)
     land_left = config.images.get("land_left")
@@ -88,6 +90,28 @@ def view(game):
                 obj.on_click = get_land_object_click_function(objects_right, obj, lambda : boat.position == "right")
                 objects_right.append(obj)
 
+    def lose(condition):
+        end_screen = game.gameDisplay.copy()
+        end_screen.fill((150,150,150), special_flags = pygame.BLEND_MULT)
+        game.set_background(end_screen)
+        game.update_function = None
+
+    def check_win():
+        right = list(map(type, objects_right))
+        if utils.compare_arrays_unordered(right, [Goat, Cabbage, Wolf]):
+            print("WON")
+    
+    def check_lose():
+        left = list(map(type, objects_left))
+        right = list(map(type, objects_right))
+        for cond in lose_conditions:
+            if boat.x <= boat.left_x:
+                if utils.compare_arrays_unordered(right, cond):
+                    lose(cond)
+            if boat.x >= boat.right_x:
+                if utils.compare_arrays_unordered(left, cond):
+                    lose(cond)
+
     define_objects([Goat, Cabbage, Wolf], [])
     boat.on_click = boat_click_action
 
@@ -104,5 +128,8 @@ def view(game):
             obj.update()
         for obj in objects_right:
             obj.update()
+
+        check_win()
+        check_lose()
 
     game.update_function = update
