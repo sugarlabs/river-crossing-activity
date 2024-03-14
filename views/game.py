@@ -1,10 +1,12 @@
 import pygame
 import config, utils
+from components.button import Button
 from components.boat import Boat
 from components.goat import Goat
 from components.wolf import Wolf
 from components.cabbage import Cabbage
 from components.row_button import RowButton
+from views import menu
 
 def view(game):
     vw = game.vw
@@ -100,7 +102,7 @@ def view(game):
         game_over_width = game_over_text.get_width()
         game_over_height = game_over_text.get_height()
 
-        ate_text = font.render("ATE", True, text_color)
+        ate_text = font.render("ate", True, text_color)
         ate_text_width = ate_text.get_width()
         ate_text_height = ate_text.get_height()
 
@@ -130,10 +132,14 @@ def view(game):
         end_screen.blit(game_over_text, (vw(50) - game_over_width // 2, board_y + board_padding))
         end_screen.blit(eater, (vw(50) - entity_width - gap // 2, board_y + board_h - board_padding - eater_h))
         end_screen.blit(prey, (vw(50) + gap // 2, board_y + board_h - board_padding - prey_h))
-        end_screen.blit(ate_text, (vw(50) - ate_text_width // 2, board_y + board_h - board_padding - max(eater_h, prey_h) // 2 - ate_text_height // 2))
+        end_screen.blit(ate_text, (vw(50) - ate_text_width // 2, board_y + board_h - board_padding - min(eater_h, prey_h) // 2 - ate_text_height // 2))
+
+        home_button_font = config.font_primary.xxl
+        home_button = Button(vw(50), board_y + board_h + vh(20), "Back Home", h = vh(25), font = home_button_font)
+        home_button.on_click = lambda : game.set_screen(menu.view)
 
         game.set_background(end_screen)
-        game.update_function = None
+        game.update_function = home_button.update
 
     def check_win():
         right = list(map(type, objects_right))
