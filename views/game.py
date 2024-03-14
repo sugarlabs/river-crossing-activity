@@ -94,7 +94,7 @@ def view(game):
 
     def lose(condition):
         end_screen = game.gameDisplay.copy()
-        end_screen.fill((150, 150, 150), special_flags = pygame.BLEND_MULT)
+        end_screen.fill((120, 120, 120), special_flags = pygame.BLEND_MULT)
 
         font = config.font_secondary.xxl
         text_color = config.colors["text"]
@@ -134,8 +134,8 @@ def view(game):
         end_screen.blit(prey, (vw(50) + gap // 2, board_y + board_h - board_padding - prey_h))
         end_screen.blit(ate_text, (vw(50) - ate_text_width // 2, board_y + board_h - board_padding - min(eater_h, prey_h) // 2 - ate_text_height // 2))
 
-        home_button_font = config.font_primary.xxl
-        home_button = Button(vw(50), board_y + board_h + vh(20), "Back Home", h = vh(25), font = home_button_font)
+        home_button_font = config.font_primary.xl
+        home_button = Button(vw(50), board_y + board_h + vh(20), "Back Home", h = vh(20), font = home_button_font)
         home_button.on_click = lambda : game.set_screen(menu.view)
 
         game.set_background(end_screen)
