@@ -68,7 +68,7 @@ class RiverCrossing:
 
         while self.running:
             self.gameDisplay.fill((2, 20, 20))
-            
+
             if self.bg is not None:
                 self.gameDisplay.blit(self.bg, (0, 0))
 
