@@ -11,7 +11,7 @@ def define_theme(name, text_color, bg_color, primary_font_name, scondary_font_na
                    "secondary_font" : scondary_font_name
                    })
 
-define_theme("default", (0, 0, 0), (0, 100, 50), "Wood.ttf", "Geist.ttf")
+define_theme("default", (0, 0, 0), (215, 186, 137), "Wood.ttf", "Geist.ttf")
 
 theme = "default" # Set initial theme
 font_primary = Font()

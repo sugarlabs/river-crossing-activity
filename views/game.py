@@ -92,7 +92,46 @@ def view(game):
 
     def lose(condition):
         end_screen = game.gameDisplay.copy()
-        end_screen.fill((150,150,150), special_flags = pygame.BLEND_MULT)
+        end_screen.fill((150, 150, 150), special_flags = pygame.BLEND_MULT)
+
+        font = config.font_secondary.xxl
+        text_color = config.colors["text"]
+        game_over_text = font.render("Game Over", True, text_color)
+        game_over_width = game_over_text.get_width()
+        game_over_height = game_over_text.get_height()
+
+        ate_text = font.render("ATE", True, text_color)
+        ate_text_width = ate_text.get_width()
+        ate_text_height = ate_text.get_height()
+
+        board_padding = 16 #Pixels
+
+        entity_width = vw(10)
+        gap = 20 + ate_text_width
+        board_y = vh(15)
+
+        eater = condition[0].__name__.lower()
+        prey = condition[1].__name__.lower()
+        eater = config.images.get(eater)
+        prey = config.images.get(prey)
+        eater = utils.scale_image_maintain_ratio(eater, w = entity_width)
+        prey = utils.scale_image_maintain_ratio(prey, w = entity_width)
+        eater_h = eater.get_height()
+        prey_h = prey.get_height()
+
+        board_w = board_padding * 2 + gap + entity_width * 2
+        board_h = board_padding * 2 + game_over_height + max(eater_h, prey_h)
+
+        board_rect = pygame.Rect(vw(50) - board_w // 2, board_y, board_w, board_h)
+
+        pygame.draw.rect(end_screen, config.colors["bg"], board_rect)
+        pygame.draw.rect(end_screen, config.colors["text"], board_rect, 2)
+
+        end_screen.blit(game_over_text, (vw(50) - game_over_width // 2, board_y + board_padding))
+        end_screen.blit(eater, (vw(50) - entity_width - gap // 2, board_y + board_h - board_padding - eater_h))
+        end_screen.blit(prey, (vw(50) + gap // 2, board_y + board_h - board_padding - prey_h))
+        end_screen.blit(ate_text, (vw(50) - ate_text_width // 2, board_y + board_h - board_padding - max(eater_h, prey_h) // 2 - ate_text_height // 2))
+
         game.set_background(end_screen)
         game.update_function = None
 
@@ -110,7 +149,7 @@ def view(game):
                     lose(cond)
             if boat.x >= boat.right_x:
                 if utils.compare_arrays_unordered(left, cond):
-                    lose(cond)
+                    lose( cond)
 
     define_objects([Goat, Cabbage, Wolf], [])
     boat.on_click = boat_click_action
