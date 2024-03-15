@@ -29,10 +29,10 @@ def view(game):
     boat_padding = vw(2)
     boat_width = vw(18)
     boat = Boat(land_width + boat_padding, vw(100) - land_width - boat_width - boat_padding, vh(90), boat_width)
+    boat.speed = vw(0.3)
 
     row_button_width = vw(8)
     row_button = RowButton(vw(50) - row_button_width // 2, vh(40), w= row_button_width)
-    row_button.on_click = lambda: boat.row(callback= lambda : row_button.flip())
 
     objects_count = 3
     land_object_width = vw(9)
@@ -141,24 +141,57 @@ def view(game):
         game.set_background(end_screen)
         game.update_function = home_button.update
 
+    def win():
+        end_screen = game.gameDisplay.copy()
+        end_screen.fill((120, 120, 120), special_flags = pygame.BLEND_MULT)
+
+        font = config.font_secondary.xxl
+        text_color = config.colors["text"]
+        you_won_text = font.render("YOU WON !!", True, text_color)
+
+        board_padding = 16 #Pixels
+        board_y = vh(15)
+
+        board_w = board_padding * 2 + you_won_text.get_width()
+        board_h = board_padding * 2 + you_won_text.get_height()
+
+        board_rect = pygame.Rect(vw(50) - board_w // 2, board_y, board_w, board_h)
+
+        pygame.draw.rect(end_screen, config.colors["bg"], board_rect)
+        pygame.draw.rect(end_screen, config.colors["text"], board_rect, 2)
+
+        end_screen.blit(you_won_text, (vw(50) - you_won_text.get_width() // 2, board_y + board_padding))
+        
+        home_button_font = config.font_primary.xl
+        home_button = Button(vw(50), board_y + board_h + vh(20), "Go Back Home", h = vh(20), font = home_button_font)
+        home_button.on_click = lambda : game.set_screen(menu.view)
+
+        game.set_background(end_screen)
+        game.update_function = home_button.update
+
     def check_win():
         right = list(map(type, objects_right))
         if utils.compare_arrays_unordered(right, [Goat, Cabbage, Wolf]):
-            print("WON")
+            win()
     
     def check_lose():
         left = list(map(type, objects_left))
         right = list(map(type, objects_right))
         for cond in lose_conditions:
-            if boat.x <= boat.left_x:
+            if boat.position == "left":
                 if utils.compare_arrays_unordered(right, cond):
                     lose(cond)
-            if boat.x >= boat.right_x:
+            if boat.position == "right":
                 if utils.compare_arrays_unordered(left, cond):
                     lose( cond)
 
+    def on_row_callback():
+        row_button.flip()
+        check_lose()
+
     define_objects([Goat, Cabbage, Wolf], [])
     boat.on_click = boat_click_action
+    row_button.on_click = lambda : boat.row(callback = on_row_callback)
 
     def draw():
         game.gameDisplay.blit(land_left, (0, int(vh(100) - 0.9 * land_left.get_height())))
@@ -166,6 +199,7 @@ def view(game):
 
     def update():
         draw()
+
         boat.update()
         row_button.update()
 
@@ -175,6 +209,5 @@ def view(game):
             obj.update()
 
         check_win()
-        check_lose()
 
     game.update_function = update

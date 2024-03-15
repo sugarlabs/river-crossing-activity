@@ -72,12 +72,16 @@ class Boat(Clickable):
         self.rect.y = self.y
         self.draw()
 
-        if self.position == "right" and self.x <= self.right_x:
+        if self.position == "right" and self.x < self.right_x:
             self.moving = True
             self.x += self.speed
-        elif self.position == "left" and self.x >= self.left_x:
+        elif self.position == "left" and self.x > self.left_x:
             self.moving = True
             self.x -= self.speed
+        elif self.position == "left" and self.x < self.left_x:
+            self.x = self.left_x
+        elif self.position == "left" and self.x > self.right_x:
+            self.x = self.right_x
         else:
             if self.moving and self.row_callback is not None:
                 self.row_callback()
