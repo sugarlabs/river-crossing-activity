@@ -29,9 +29,10 @@ class Boat(Clickable):
         self.holding_w = None
         self.holding_h = None
 
+        self.row_callback = None
         self.position = "left"
         self.moving = False
-        self.row_callback = None
+        self.speed = 3
 
     def hold(self, image):
         if image is None:
@@ -73,10 +74,10 @@ class Boat(Clickable):
 
         if self.position == "right" and self.x <= self.right_x:
             self.moving = True
-            self.x += 3
+            self.x += self.speed
         elif self.position == "left" and self.x >= self.left_x:
             self.moving = True
-            self.x -= 3
+            self.x -= self.speed
         else:
             if self.moving and self.row_callback is not None:
                 self.row_callback()
