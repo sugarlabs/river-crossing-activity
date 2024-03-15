@@ -21,3 +21,10 @@ def array_has_no_none(arr):
 def compare_arrays_unordered(*arrays):
     sets = [set(arr) for arr in arrays]
     return all(s == sets[0] for s in sets)
+
+def rotate_by_center(image, angle, x, y):
+    
+    rotated_image = pygame.transform.rotate(image, angle)
+    new_rect = rotated_image.get_rect(center = image.get_rect(center = (x, y)).center)
+
+    return rotated_image, new_rect
