@@ -1,11 +1,12 @@
 import pygame
-import config, utils
+import config, utils, random
 from components.button import Button
 from components.boat import Boat
 from components.goat import Goat
 from components.wolf import Wolf
 from components.cabbage import Cabbage
 from components.row_button import RowButton
+from components.upper_layer import Upper_Layer
 from views import menu
 
 def view(game):
@@ -39,6 +40,10 @@ def view(game):
     objects_left = []
     object_in_boat = {"class": None}
     objects_right = []
+
+    ul = Upper_Layer()
+    ul.w = vw(100)
+    ul.h = vh(30)
 
     def boat_click_action():
         if boat.moving:
@@ -202,6 +207,13 @@ def view(game):
 
         boat.update()
         row_button.update()
+        ul.update() 
+
+        if random.random() < 1 / 700:
+            r = random.random()
+            f_w = vw(5) + r * vw(13)
+            f_s = 0.05 + r * 0.4
+            ul.generate(w= f_w, speed = f_s)
 
         for obj in objects_left:
             obj.update()
