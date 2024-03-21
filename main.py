@@ -40,15 +40,15 @@ class RiverCrossing:
         m_bg = bg
 
         if screen_w < w or screen_w > w:
-            m_h = (h // w) * screen_w
+            m_h = (h / w) * screen_w
             m_bg = pygame.transform.scale(
-            bg, (screen_w, m_h))
+            bg, (screen_w, int(m_h)))
             w, h = m_bg.get_size()
             m_w, m_h = w, h
 
         if screen_h > h:
-            m_w = (w // h) * screen_h
-            m_bg = pygame.transform.scale(m_w, screen_h)
+            m_w = (w / h) * screen_h
+            m_bg = pygame.transform.scale(bg, (int(m_w), screen_h))
 
         self.bg = m_bg
 
