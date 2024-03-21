@@ -2,7 +2,7 @@
 name = River Crossing
 activity_version = 1
 bundle_id = org.sugarlabs.rivercrossing
-icon = gcw
+icon = boat
 exec = sugar-activity3 activity.RiverCrossingActivity
 license = GPLv3+
 summary = A Puzzle and Strategy game
