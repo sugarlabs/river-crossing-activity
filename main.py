@@ -4,6 +4,7 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 import config
 from views import menu
+from components.help import Help
 
 class RiverCrossing:
     def __init__(self):
@@ -14,6 +15,8 @@ class RiverCrossing:
         self.info = None
         self.update_function = None
         self.bg = None
+
+        self.help_popup = Help(self)
 
     def vw(self, x):
         return (x / 100) * self.display_rect.width
@@ -52,6 +55,11 @@ class RiverCrossing:
 
         self.bg = m_bg
 
+    def show_help(self):
+        self.help_popup.show()
+
+    def hide_help(self):
+        self.help_popup.hide()
 
     def run(self):
         self.gameDisplay = pygame.display.get_surface()
@@ -60,6 +68,7 @@ class RiverCrossing:
 
         config.set_theme("default")
         self.set_screen(menu.view)
+        self.help_popup.initialize()
 
         if not (self.gameDisplay):
             self.gameDisplay = pygame.display.set_mode(
@@ -72,15 +81,16 @@ class RiverCrossing:
             if self.bg is not None:
                 self.gameDisplay.blit(self.bg, (0, 0))
 
+            if self.update_function is not None:
+                self.update_function()
+            self.help_popup.update()
+
             while Gtk.events_pending():
                 Gtk.main_iteration()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    break
-            
-            if self.update_function is not None:
-                self.update_function()
+                    break            
 
             pygame.display.update()
             self.clock.tick(60)

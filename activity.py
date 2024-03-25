@@ -45,10 +45,11 @@ class RiverCrossingActivity(Activity):
         toolbar_box.toolbar.insert(separator, -1)
         separator.show()
 
-        button = ToolButton('speaker-muted-100')
-        button.set_tooltip(_('Sound'))
-        button.connect('clicked', self.sound_control)
-        toolbar_box.toolbar.insert(button, -1)
+        help_button = ToolButton('toolbar-help')
+        help_button.set_tooltip(_('How To Play'))
+        help_button.connect('clicked', self.show_help)
+        toolbar_box.toolbar.insert(help_button, -1)
+        help_button.show()
 
         separator = Gtk.SeparatorToolItem()
         separator.props.draw = False
@@ -61,15 +62,8 @@ class RiverCrossingActivity(Activity):
         stop_button.show()
         stop_button.connect('clicked', self._stop_cb)
 
-    def sound_control(self, button):
-        self.sound = not self.sound
-        self.game.sound = self.sound
-        if not self.sound:
-            button.set_icon_name('speaker-muted-000')
-            button.set_tooltip(_('No sound'))
-        else:
-            button.set_icon_name('speaker-muted-100')
-            button.set_tooltip(_('Sound'))
+    def show_help(self, button):
+        self.game.show_help()
 
     def _stop_cb(self, button):
         self.game.running = False

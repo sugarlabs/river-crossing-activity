@@ -31,7 +31,7 @@ class Upper_Layer(Drawable):
         for floater in self.floaters:
             floater["x"] += floater["speed"] * (1 if self.direction == "right" else -1)
             image.blit(floater["image"], (floater["x"], floater["y"]))
-            
+
             if self.direction == "right" and floater["x"] > self.w * 1.5:
                 del floater
             if self.direction == "left" and floater["x"] < - self.w * 1.5:
