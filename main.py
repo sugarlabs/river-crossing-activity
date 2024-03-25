@@ -83,7 +83,6 @@ class RiverCrossing:
 
             if self.update_function is not None:
                 self.update_function()
-            self.help_popup.update()
 
             while Gtk.events_pending():
                 Gtk.main_iteration()
