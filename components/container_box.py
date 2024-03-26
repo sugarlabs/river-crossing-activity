@@ -1,6 +1,6 @@
 import config
 import pygame
-from components.common import Drawable
+
 
 class ContainerBox():
     def __init__(self, x, y):
@@ -19,15 +19,16 @@ class ContainerBox():
         self.bg = config.colors["bg"]
 
     def add_row(self):
-        self.rows.append({"elements" : [], "height" : 0, "width" : 0})
+        self.rows.append({"elements": [], "height": 0, "width": 0})
         self.update_layout()
         return len(self.rows) - 1
 
-    def define_row(self, row, elements): # Elements of pygame.Surface type array
-        self.rows[row - 1]["elements"].append(element.copy())
-        self.update_layout()
+    def define_row(self, row, elements):  # Elements of pygame.Surface type array
+        for element in elements:
+            self.rows[row - 1]["elements"].append(element.copy())
+            self.update_layout()
 
-    def add_element(self, row, element): # Element of pygame.Surface type
+    def add_element(self, row, element):  # Element of pygame.Surface type
         self.rows[row - 1]["elements"].append(element.copy())
         self.update_layout()
 

@@ -6,6 +6,7 @@ import config
 from views import menu
 from components.help import Help
 
+
 class RiverCrossing:
     def __init__(self):
         self.running = True
@@ -44,8 +45,7 @@ class RiverCrossing:
 
         if screen_w < w or screen_w > w:
             m_h = (h / w) * screen_w
-            m_bg = pygame.transform.scale(
-            bg, (screen_w, int(m_h)))
+            m_bg = pygame.transform.scale(bg, (screen_w, int(m_h)))
             w, h = m_bg.get_size()
             m_w, m_h = w, h
 
@@ -89,7 +89,7 @@ class RiverCrossing:
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    break            
+                    break
 
             pygame.display.update()
             self.clock.tick(60)

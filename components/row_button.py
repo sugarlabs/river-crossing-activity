@@ -1,8 +1,11 @@
-import config, utils, pygame
+import config
+import utils
+import pygame
 from components.common import Clickable, Drawable
 
+
 class RowButton(Clickable, Drawable):
-    def __init__(self, x, y, w=None, h = None):
+    def __init__(self, x, y, w=None, h=None):
         super().__init__()
 
         self.gameDisplay = pygame.display.get_surface()

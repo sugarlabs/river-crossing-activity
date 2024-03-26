@@ -1,8 +1,11 @@
-import config, utils, pygame
+import config
+import utils
+import pygame
 from components.container_box import ContainerBox
 
+
 class Help():
-    def __init__(self, game, w = None, h = None):
+    def __init__(self, game, w=None, h=None):
         super().__init__()
 
         self.prev_update_func = None
@@ -25,18 +28,19 @@ class Help():
         self.container.gap_y = 30
 
         cabbage = config.images.get("cabbage")
-        cabbage = utils.scale_image_maintain_ratio(cabbage, h = vh(10))
+        cabbage = utils.scale_image_maintain_ratio(cabbage, h=vh(10))
 
         wolf = config.images.get("wolf")
-        wolf = utils.scale_image_maintain_ratio(wolf, h = vh(10))
-        
+        wolf = utils.scale_image_maintain_ratio(wolf, h=vh(10))
+
         goat = config.images.get("goat")
-        goat = utils.scale_image_maintain_ratio(goat, h = vh(10))
+        goat = utils.scale_image_maintain_ratio(goat, h=vh(10))
 
         arrow = config.images.get("arrow")
-        arrow = utils.scale_image_maintain_ratio(arrow, h = vh(6))
+        arrow = utils.scale_image_maintain_ratio(arrow, h=vh(6))
 
         text_color = config.colors["text"]
+
         def text(str):
             return config.font_secondary.xl.render(str, True, text_color)
 
@@ -52,7 +56,7 @@ class Help():
         self.container.add_element(2, cabbage)
         self.container.add_element(2, text("alone with"))
         self.container.add_element(2, goat)
-        
+
         self.container.add_row()
         self.container.add_element(3, text("Don't leave"))
         self.container.add_element(3, goat)
@@ -70,11 +74,11 @@ class Help():
         self.container.add_row()
         self.container.add_row()
         self.container.add_element(7, text("< Click to continue >"))
-        
+
     def show(self):
         self.prev_bg = self.game.bg
         bg = self.game.gameDisplay.copy()
-        bg.fill((120, 120, 120), special_flags = pygame.BLEND_MULT)
+        bg.fill((120, 120, 120), special_flags=pygame.BLEND_MULT)
         self.game.set_background(bg)
         self.prev_update_func = self.game.update_function
         self.game.update_function = self.update
@@ -88,7 +92,7 @@ class Help():
     def update(self):
         if self.container is not None and not self.hidden:
             self.container.update()
-        
+
         pressed_btn = pygame.mouse.get_pressed()[0]
 
         if self.clicked and pressed_btn != 1:

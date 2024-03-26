@@ -1,6 +1,7 @@
 import pygame
 import utils
 
+
 class Clickable:
     def __init__(self):
         self.press = False
@@ -14,13 +15,15 @@ class Clickable:
 
     def update(self):
         pressed_btn = pygame.mouse.get_pressed()[0]
-        if self.on_click is not None and self.press and self.hovered() and pressed_btn != 1:
-            self.on_click()
+        if self.on_click is not None and self.press:
+            if self.hovered() and pressed_btn != 1:
+                self.on_click()
 
         if self.hovered() and pressed_btn == 1:
             self.press = True
         else:
             self.press = False
+
 
 class Drawable:
     def __init__(self):
@@ -30,9 +33,10 @@ class Drawable:
         self.x = 0
         self.y = 0
 
-    def set_image_rect(self, image, x = None, y = None, scale = 1):
+    def set_image_rect(self, image, x=None, y=None, scale=1):
         w, h = image.get_size()
-        self.image = pygame.transform.scale(image, (int(w * scale), int(h * scale)))
+        self.image = pygame.transform.scale(image,
+                                            (int(w * scale), int(h * scale)))
 
         if x is not None:
             self.x = x
