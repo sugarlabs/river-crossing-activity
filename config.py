@@ -34,7 +34,7 @@ def set_theme(theme_name):
 
 def load_images():
     images = {}
-    directory = f"assets/images/themes/{theme}"
+    directory = f"assets/images/{theme}"
     for filename in os.listdir(directory):
         if filename.endswith(".png") or filename.endswith(".jpg") or filename.endswith(".jpeg"):
             file_path = os.path.join(directory, filename)
