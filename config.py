@@ -20,18 +20,11 @@ from font import Font
 
 
 themes = {}
-
-
-def define_theme(name, text_color, bg_color,
-                 primary_font_name, scondary_font_name):
-
-    themes[name] = ({"colors": {"text": text_color, "bg": bg_color},
-                     "primary_font": primary_font_name,
-                     "secondary_font": scondary_font_name
-                     })
-
-
-define_theme("default", (0, 0, 0), (215, 186, 137), "Wood.ttf", "Geist.ttf")
+themes["default"] = (
+    {"colors": {"text": (0, 0, 0), "bg": (215, 186, 137)},
+    "primary_font": "Wood.ttf",
+    "secondary_font": "Geist.ttf"}
+)
 
 
 theme = "default"  # Set initial theme

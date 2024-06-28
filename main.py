@@ -16,7 +16,6 @@
 
 import pygame
 import gi
-gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 import config
 from views import menu
@@ -86,7 +85,7 @@ class RiverCrossing:
         self.set_screen(menu.view)
         self.help_popup.initialize()
 
-        if not (self.gameDisplay):
+        if not self.gameDisplay:
             self.gameDisplay = pygame.display.set_mode(
                 (self.info.current_w, self.info.current_h))
             pygame.display.set_caption("River Crossing Puzzle")
