@@ -114,5 +114,4 @@ class Help():
         if self.clicked and pressed_btn != 1:
             self.hide()
 
-        if pressed_btn == 1:
-            self.clicked = True
+        self.clicked = pressed_btn == 1
