@@ -33,13 +33,13 @@ def view(game):
     play_button.on_click = lambda: game.set_screen(gamescreen.view)
     buttons.append(play_button)
 
-    play_button = Button(vw(50), vh(78),
-                         "Settings", h=vh(20),
-                         font=config.font_primary.xl)
+    # play_button = Button(vw(50), vh(78),
+                        #  "Settings", h=vh(20),
+                        #  font=config.font_primary.xl)
     # TODO - make settings screen view (include theme and speed option)
     # Connect view with this button
-    play_button.on_click = lambda: print("Coming Soon")
-    buttons.append(play_button)
+    # play_button.on_click = lambda: print("Coming Soon")
+    # buttons.append(play_button)
 
     title_h = vh(25)
     title = config.images.get("logo")
