@@ -50,7 +50,9 @@ class Upper_Layer(Drawable):
         image = pygame.Surface((self.w, self.h),
                                pygame.SRCALPHA, 32).convert_alpha()
         for floater in self.floaters:
-            floater["x"] += floater["speed"] * (1 if self.direction == "right" else -1)
+            floater["x"] += floater["speed"] * (
+                1 if self.direction == "right" else -1
+            )
             image.blit(floater["image"], (floater["x"], floater["y"]))
 
             if self.direction == "right" and floater["x"] > self.w * 1.5:

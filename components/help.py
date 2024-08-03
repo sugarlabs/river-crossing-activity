@@ -34,7 +34,6 @@ class Help():
     def initialize(self):
         self.container = ContainerBox(self.game.vw(50), self.game.vh(50))
 
-        vw = self.game.vw
         vh = self.game.vh
 
         self.container.padding_x = 32

@@ -30,10 +30,14 @@ class Goat(Clickable, Drawable):
         self.on_click = None
         self.step = 0
 
-        self.img_1 = utils.scale_image_maintain_ratio(config.images.get("goat"),
-                                                      w=w, h=h)
-        self.img_2 = utils.scale_image_maintain_ratio(config.images.get("goat_idle"),
-                                                      w=w, h=h)
+        self.img_1 = utils.scale_image_maintain_ratio(
+            config.images.get("goat"),
+            w=w, h=h
+        )
+        self.img_2 = utils.scale_image_maintain_ratio(
+            config.images.get("goat_idle"),
+            w=w, h=h
+        )
 
         self.set_image_rect(self.img_1, x, bottom - self.img_1.get_height())
 

@@ -39,7 +39,8 @@ class ContainerBox():
         self.update_layout()
         return len(self.rows) - 1
 
-    def define_row(self, row, elements):  # Elements of pygame.Surface type array
+    # Elements of pygame.Surface type array
+    def define_row(self, row, elements):
         for element in elements:
             self.rows[row - 1]["elements"].append(element.copy())
             self.update_layout()

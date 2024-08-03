@@ -115,9 +115,11 @@ def view(game):
             for i, Obj in enumerate(left):
                 obj = Obj(gap * (i + 1) + land_object_width * i,
                           bottom, w=land_object_width)
-                obj.on_click = get_land_object_click_function(objects_left,
-                                                              obj,
-                                                              lambda: boat.position == "left")
+                obj.on_click = get_land_object_click_function(
+                    objects_left,
+                    obj,
+                    lambda: boat.position == "left"
+                )
                 objects_left.append(obj)
 
         # Right Land
@@ -127,11 +129,16 @@ def view(game):
             gap = (land_width - objects_width) / (objects_count + 1)
             bottom = vh(100) - land_right_h // 4
             for i, Obj in enumerate(right):
-                obj = Obj(vw(100) - (gap * (i + 1) + land_object_width * (i + 1)),
-                          bottom, w=land_object_width)
-                obj.on_click = get_land_object_click_function(objects_right,
-                                                              obj,
-                                                              lambda: boat.position == "right")
+                obj = Obj(
+                    vw(100) - (gap * (i + 1) + land_object_width * (i + 1)),
+                    bottom,
+                    w=land_object_width
+                )
+                obj.on_click = get_land_object_click_function(
+                    objects_right,
+                    obj,
+                    lambda: boat.position == "right"
+                )
                 objects_right.append(obj)
 
     def lose(condition):
@@ -184,9 +191,14 @@ def view(game):
                         (vw(50) + gap // 2,
                          board_y + board_h - board_padding - prey_h))
 
-        end_screen.blit(ate_text,
-                        (vw(50) - ate_text_width // 2,
-                         board_y + board_h - board_padding - min(eater_h, prey_h) // 2 - ate_text_height // 2))
+        x_pos = vw(50) - ate_text_width // 2
+        y_offset = min(eater_h, prey_h) // 2 + ate_text_height // 2
+        y_pos = board_y + board_h - board_padding - y_offset
+
+        end_screen.blit(
+            ate_text,
+            (x_pos, y_pos)
+        )
 
         home_button_font = config.font_primary.xl
         home_button = Button(vw(50),
