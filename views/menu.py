@@ -28,7 +28,8 @@ def view(game):
 
     game.set_background(config.images.get("menu_bg"))
 
-    play_button = Button(vw(50), vh(55), "Play", h=vh(20), font=config.font_primary.xl)
+    play_button = Button(vw(50), vh(55), "Play", h=vh(20),
+                         font=config.font_primary.xl)
     play_button.on_click = lambda: game.set_screen(gamescreen.view)
     buttons.append(play_button)
 

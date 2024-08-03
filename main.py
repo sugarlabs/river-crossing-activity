@@ -15,7 +15,6 @@
 
 
 import pygame
-import gi
 from gi.repository import Gtk
 import config
 from views import menu

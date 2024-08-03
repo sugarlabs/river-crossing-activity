@@ -22,8 +22,8 @@ from font import Font
 themes = {}
 themes["default"] = (
     {"colors": {"text": (0, 0, 0), "bg": (215, 186, 137)},
-    "primary_font": "Wood.ttf",
-    "secondary_font": "Geist.ttf"}
+        "primary_font": "Wood.ttf",
+        "secondary_font": "Geist.ttf"}
 )
 
 
@@ -45,7 +45,7 @@ def load_images():
     images = {}
     directory = f"assets/images/{theme}"
     for filename in os.listdir(directory):
-        if filename.endswith(".png") or filename.endswith(".jpg") or filename.endswith(".jpeg"):
+        if filename.endswith(".png") or filename.endswith(".jpg"):
             file_path = os.path.join(directory, filename)
             try:
                 image = pygame.image.load(file_path)

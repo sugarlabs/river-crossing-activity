@@ -40,9 +40,9 @@ class RiverCrossingActivity(Activity):
         self.game = RiverCrossing()
         self.build_toolbar()
         self.game.canvas = sugargame.canvas.PygameCanvas(
-                self,
-                main=self.game.run,
-                modules=[pygame.display, pygame.font, pygame.mixer])
+            self,
+            main=self.game.run,
+            modules=[pygame.display, pygame.font, pygame.mixer])
         self.set_canvas(self.game.canvas)
         self.game.canvas.grab_focus()
 

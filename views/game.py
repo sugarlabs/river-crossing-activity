@@ -40,12 +40,14 @@ def view(game):
     land_left = config.images.get("land_left")
     land_right = config.images.get("land_right")
 
-    land_left_h = land_width * (land_left.get_height() / land_left.get_width())
+    left_dim_ration = land_left.get_height() / land_left.get_width()
+    land_left_h = land_width * (left_dim_ration)
     land_left = pygame.transform.scale(land_left,
                                        (int(land_width),
                                         int(land_left_h)))
 
-    land_right_h = land_width * (land_right.get_height() / land_right.get_width())
+    right_dim_ratio = land_right.get_height() / land_right.get_width()
+    land_right_h = land_width * (right_dim_ratio)
     land_right = pygame.transform.scale(land_right,
                                         (int(land_width),
                                          int(land_right_h)))
@@ -107,24 +109,28 @@ def view(game):
         # Left Land
         if left is not None:
             objects_left.clear()
-            gap = (land_width - objects_count * land_object_width) / (objects_count + 1)
+            objects_width = objects_count * land_object_width
+            gap = (land_width - objects_width) / (objects_count + 1)
             bottom = vh(100) - land_left_h // 4
             for i, Obj in enumerate(left):
                 obj = Obj(gap * (i + 1) + land_object_width * i,
                           bottom, w=land_object_width)
-                obj.on_click = get_land_object_click_function(objects_left, obj,
+                obj.on_click = get_land_object_click_function(objects_left,
+                                                              obj,
                                                               lambda: boat.position == "left")
                 objects_left.append(obj)
 
         # Right Land
         if right is not None:
             objects_right.clear()
-            gap = (land_width - objects_count * land_object_width) / (objects_count + 1)
+            objects_width = objects_count * land_object_width
+            gap = (land_width - objects_width) / (objects_count + 1)
             bottom = vh(100) - land_right_h // 4
             for i, Obj in enumerate(right):
                 obj = Obj(vw(100) - (gap * (i + 1) + land_object_width * (i + 1)),
                           bottom, w=land_object_width)
-                obj.on_click = get_land_object_click_function(objects_right, obj,
+                obj.on_click = get_land_object_click_function(objects_right,
+                                                              obj,
                                                               lambda: boat.position == "right")
                 objects_right.append(obj)
 
