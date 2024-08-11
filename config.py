@@ -25,6 +25,11 @@ themes["default"] = (
         "primary_font": "Wood.ttf",
         "secondary_font": "Geist.ttf"}
 )
+themes["3d"] = (
+    {"colors": {"text": (0, 0, 0), "bg": (215, 186, 137)},
+        "primary_font": "Wood.ttf",
+        "secondary_font": "Geist.ttf"}
+)
 
 
 theme = "default"  # Set initial theme

@@ -80,7 +80,7 @@ class RiverCrossing:
         self.info = pygame.display.Info()
         self.display_rect = self.gameDisplay.get_rect()
 
-        config.set_theme("default")
+        config.set_theme("3d")
         self.set_screen(menu.view)
         self.help_popup.initialize()
 
