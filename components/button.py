@@ -22,7 +22,7 @@ from components.common import Clickable, Drawable
 
 class Button(Clickable, Drawable):
     def __init__(self, x, y,
-                 label, w=None, h=None,
+                 label, w=None, h=None, subtitle=None,
                  scale_factor=0.05, font=None):
         super().__init__()
 
@@ -42,6 +42,13 @@ class Button(Clickable, Drawable):
         label_rect.x = btn_rect.width // 2 - label_rect.width // 2
         label_rect.y = btn_rect.height // 2 - int(label_rect.height * 0.7)
         self.img.blit(label, label_rect)
+
+        if subtitle is not None:
+            subtitle = font.render(subtitle, True, text_color)
+            subtitle_rect = subtitle.get_rect()
+            subtitle_rect.x = btn_rect.width // 2 - subtitle_rect.width // 2
+            subtitle_rect.y = label_rect.y + label_rect.height + 6
+            self.img.blit(subtitle, subtitle_rect)
 
         self.set_image_rect(self.img,
                             x - self.img.get_width() // 2,
