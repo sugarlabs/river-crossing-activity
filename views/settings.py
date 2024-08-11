@@ -23,6 +23,7 @@ import pygame
 themes = ["default", "3d"]
 theme_names = ["Classic", "Classic 3D"]
 
+
 def view(game):
     buttons = []
     vw = game.vw
@@ -30,26 +31,39 @@ def view(game):
 
     game.set_background(None)
 
-    theme_icon = Cabbage(vw(50) - 200, vh(18), w = 200)
+    theme_icon = Cabbage(vw(50) - 200, vh(18), w=200)
 
-    theme_text = config.font_secondary.xxl.render(theme_names[themes.index(config.theme)], True, config.colors["text"])
+    theme_index = themes.index(config.theme)
+    theme_name = theme_names[theme_index]
+    theme_text = config.font_secondary.xxl.render(
+        theme_name,
+        True,
+        config.colors["text"]
+    )
+
     theme_text_rect = theme_text.get_rect()
-    
+
     themes_button = Button(vw(50), vh(28), "Change Theme", h=vh(15),
-                         font=config.font_primary.lg)
+                           font=config.font_primary.lg)
+
     def change_theme():
-        config.set_theme(themes[(themes.index(config.theme) + 1) % len(themes)])
+        current_theme_index = themes.index(config.theme)
+        next_theme_index = (current_theme_index + 1) % len(themes)
+        config.set_theme(themes[next_theme_index])
         game.set_screen(view)
     themes_button.on_click = lambda: change_theme()
     buttons.append(themes_button)
-    
+
     back_button = Button(vw(50), vh(75), "Done", h=vh(15),
                          font=config.font_primary.lg)
     back_button.on_click = lambda: game.set_screen(menu.view)
     buttons.append(back_button)
 
     def update():
-        game.gameDisplay.blit(theme_text, pygame.Rect(vw(50) - 32, vh(10), theme_text_rect.width, theme_text_rect.height))
+        game.gameDisplay.blit(theme_text, pygame.Rect(vw(50) - 32,
+                                                      vh(10),
+                                                      theme_text_rect.width,
+                                                      theme_text_rect.height))
         for btn in buttons:
             btn.update()
         theme_icon.update()

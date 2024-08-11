@@ -35,8 +35,8 @@ def view(game):
     buttons.append(play_button)
 
     settings_button = Button(vw(50), vh(78),
-     "Settings", h=vh(20),
-     font=config.font_primary.xl)
+                             "Settings", h=vh(20),
+                             font=config.font_primary.xl)
     settings_button.on_click = lambda: game.set_screen(settings.view)
     buttons.append(settings_button)
 
