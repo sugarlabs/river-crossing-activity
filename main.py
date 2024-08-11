@@ -51,6 +51,9 @@ class RiverCrossing:
         view(self)
 
     def set_background(self, bg):
+        if bg is None:
+            self.bg = None
+            return
         w, h = bg.get_size()
         screen_w, screen_h = self.gameDisplay.get_size()
         m_w, m_h = w, h
@@ -80,7 +83,7 @@ class RiverCrossing:
         self.info = pygame.display.Info()
         self.display_rect = self.gameDisplay.get_rect()
 
-        config.set_theme("3d")
+        config.set_theme("default")
         self.set_screen(menu.view)
         self.help_popup.initialize()
 
@@ -90,7 +93,7 @@ class RiverCrossing:
             pygame.display.set_caption("River Crossing Puzzle")
 
         while self.running:
-            self.gameDisplay.fill((2, 20, 20))
+            self.gameDisplay.fill(config.colors["bg"])
 
             if self.bg is not None:
                 self.gameDisplay.blit(self.bg, (0, 0))
