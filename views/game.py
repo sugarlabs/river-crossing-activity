@@ -282,6 +282,12 @@ def view(game):
         row_button.update()
         ul.update()
 
+        keys = pygame.key.get_pressed()
+        if keys[92] and boat.position == "right":
+            boat.row()
+        if keys[91] and boat.position == "left":
+            boat.row()
+
         if random.random() < 1 / 700:
             r = random.random()
             f_w = vw(5) + r * vw(13)
