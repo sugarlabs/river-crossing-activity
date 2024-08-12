@@ -51,6 +51,7 @@ def view(game):
         next_theme_index = (current_theme_index + 1) % len(themes)
         config.set_theme(themes[next_theme_index])
         game.set_screen(view)
+
     themes_button.on_click = lambda: change_theme()
     buttons.append(themes_button)
 

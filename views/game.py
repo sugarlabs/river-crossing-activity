@@ -261,6 +261,7 @@ def view(game):
 
     def on_row_callback():
         row_button.flip()
+        boat.farmer = pygame.transform.flip(boat.farmer.copy(), True, False) 
         check_lose()
 
     define_objects([Goat, Cabbage, Wolf], [])
