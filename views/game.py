@@ -284,9 +284,9 @@ def view(game):
 
         keys = pygame.key.get_pressed()
         if keys[92] and boat.position == "right":
-            boat.row()
+            boat.row(callback=on_row_callback)
         if keys[91] and boat.position == "left":
-            boat.row()
+            boat.row(callback=on_row_callback)
 
         if random.random() < 1 / 700:
             r = random.random()
