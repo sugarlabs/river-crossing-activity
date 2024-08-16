@@ -261,7 +261,8 @@ def view(game):
 
     def on_row_callback():
         row_button.flip()
-        boat.farmer = pygame.transform.flip(boat.farmer.copy(), True, False) 
+        boat.boat = pygame.transform.flip(boat.boat.copy(), True, False) 
+        boat.farmer = pygame.transform.flip(boat.farmer.copy(), True, False)
         check_lose()
 
     define_objects([Goat, Cabbage, Wolf], [])
@@ -282,11 +283,12 @@ def view(game):
         row_button.update()
         ul.update()
 
-        keys = pygame.key.get_pressed()
-        if keys[92] and boat.position == "right":
-            boat.row(callback=on_row_callback)
-        if keys[91] and boat.position == "left":
-            boat.row(callback=on_row_callback)
+        for event in game.events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT and boat.position == "right":
+                    boat.row(callback=on_row_callback)
+                if event.key == pygame.K_RIGHT and boat.position == "left":
+                    boat.row(callback=on_row_callback)
 
         if random.random() < 1 / 700:
             r = random.random()

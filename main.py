@@ -30,6 +30,7 @@ class RiverCrossing:
         self.info = None
         self.update_function = None
         self.bg = None
+        self.events = []
 
         self.help_popup = Help(self)
 
@@ -104,7 +105,9 @@ class RiverCrossing:
             while Gtk.events_pending():
                 Gtk.main_iteration()
 
+            self.events = []
             for event in pygame.event.get():
+                self.events.append(event)
                 if event.type == pygame.QUIT:
                     break
 
