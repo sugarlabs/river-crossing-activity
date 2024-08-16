@@ -35,6 +35,7 @@ class Boat(Clickable):
         self.boat_w = self.boat.get_width()
         self.boat_h = self.boat.get_height()
 
+        self.farmer_w = self.farmer.get_width()
         self.farmer_h = self.farmer.get_height()
 
         self.left_x = left_x
@@ -60,12 +61,22 @@ class Boat(Clickable):
         self.holding_w, self.holding_h = self.holding.get_size()
 
     def draw(self):
-        farmer_x = self.x + self.boat_w * 0.1
+        farmer_x = 0
+        if (self.position == "right" and self.moving) or (self.position == "left" and not self.moving):
+            farmer_x = self.x + self.boat_w * 0.1
+        if (self.position == "left" and self.moving) or (self.position == "right" and not self.moving):
+            farmer_x = self.x + self.boat_w * 0.9 - self.farmer_w
+
         farmer_y = self.y - self.farmer_h * 0.6
         self.gameDisplay.blit(self.farmer, (int(farmer_x), int(farmer_y)))
 
         if self.holding is not None:
-            holding_x = self.x + self.boat_w * 0.9 - self.holding_w
+            holding_x = 0
+            if (self.position == "left" and self.moving) or (self.position == "right" and not self.moving):
+                holding_x = self.x + self.boat_w * 0.1
+            if (self.position == "right" and self.moving) or (self.position == "left" and not self.moving):
+                holding_x = self.x + self.boat_w * 0.9 - self.holding_w
+
             holding_y = self.y - self.holding_h * 0.5
             self.gameDisplay.blit(self.holding,
                                   (int(holding_x),
@@ -89,7 +100,6 @@ class Boat(Clickable):
         self.rect = self.boat.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
-        self.draw()
 
         if self.position == "right" and self.x < self.right_x:
             self.moving = True
@@ -105,3 +115,4 @@ class Boat(Clickable):
             if self.moving and self.row_callback is not None:
                 self.row_callback()
             self.moving = False
+        self.draw()

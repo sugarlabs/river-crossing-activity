@@ -261,7 +261,7 @@ def view(game):
 
     def on_row_callback():
         row_button.flip()
-        boat.boat = pygame.transform.flip(boat.boat.copy(), True, False) 
+        boat.boat = pygame.transform.flip(boat.boat.copy(), True, False)
         boat.farmer = pygame.transform.flip(boat.farmer.copy(), True, False)
         check_lose()
 
