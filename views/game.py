@@ -285,6 +285,8 @@ def view(game):
 
         for event in game.events:
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and not boat.moving:
+                    boat_click_action()
                 if event.key == pygame.K_LEFT and boat.position == "right":
                     boat.row(callback=on_row_callback)
                 if event.key == pygame.K_RIGHT and boat.position == "left":
