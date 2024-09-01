@@ -81,11 +81,13 @@ def view(game):
         left = list(map(type, objects_left))
         right = list(map(type, objects_right))
         if boat.position == "left":
-            left.append(object_in_boat["class"])
-            define_objects(left=left)
+            if object_in_boat["class"] is not None:
+                left.append(object_in_boat["class"])
+                define_objects(left=left)
         if boat.position == "right":
-            right.append(object_in_boat["class"])
-            define_objects(right=right)
+            if object_in_boat["class"] is not None:
+                right.append(object_in_boat["class"])
+                define_objects(right=right)
 
         object_in_boat["class"] = None
 
