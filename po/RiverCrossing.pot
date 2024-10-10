@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-21 09:45+0000\n"
+"POT-Creation-Date: 2024-10-10 07:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,10 +25,6 @@ msgstr ""
 msgid "A Puzzle and Strategy game"
 msgstr ""
 
-#: activity.py:49 activity.py:72
-msgid "Sound"
-msgstr ""
-
-#: activity.py:69
-msgid "No sound"
+#: activity.py:65
+msgid "How To Play"
 msgstr ""
