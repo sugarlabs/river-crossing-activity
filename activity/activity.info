@@ -6,4 +6,4 @@ icon = boat
 exec = sugar-activity3 activity.RiverCrossingActivity
 license = GPLv3+
 summary = A Puzzle and Strategy game
-repository = https://github.com/marsian83/GoatCabbageWolfActivity.git
+repository = https://github.com/sugarlabs/river-crossing-activity.git
