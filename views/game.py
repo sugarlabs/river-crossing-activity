@@ -258,7 +258,7 @@ def view(game):
                 if utils.compare_arrays_unordered(right, cond):
                     lose(cond)
             if boat.position == "right":
-                if utils.compare_arrays_unordered(left, cond):
+                if utils.compare_arrays_unordered(left, cond) or utils.compare_arrays_unordered(left, [Goat, Cabbage, Wolf]):
                     lose(cond)
 
     def on_row_callback():
