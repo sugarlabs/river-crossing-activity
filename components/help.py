@@ -79,12 +79,21 @@ class Help():
         self.container.add_element(3, wolf)
 
         self.container.add_row()
-        self.container.add_element(4, text("Click on your boat to unmount it"))
+        self.container.add_element(4, text("Don't leave"))
+        self.container.add_element(4, goat)
+        self.container.add_element(4, text("and"))
+        self.container.add_element(4, wolf)
+        self.container.add_element(4, text("and"))
+        self.container.add_element(4, cabbage)
+        self.container.add_element(4, text("alone without farmer"))
 
         self.container.add_row()
-        self.container.add_element(5, text("Click"))
-        self.container.add_element(5, arrow)
-        self.container.add_element(5, text("to row your boat"))
+        self.container.add_element(5, text("Click on your boat to unmount it"))
+
+        self.container.add_row()
+        self.container.add_element(6, text("Click"))
+        self.container.add_element(6, arrow)
+        self.container.add_element(6, text("to row your boat"))
 
         self.container.add_row()
         self.container.add_row()
